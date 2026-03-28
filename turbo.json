@@ -1,0 +1,42 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "ui": "tui",
+  "daemon": true,
+  "envMode": "strict",
+  "globalEnv": ["NODE_ENV", "CI"],
+  "globalDependencies": [".nvmrc", "tsconfig*.json"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*", "!**/*.test.*", "!**/*.spec.*"],
+      "outputs": ["dist/**", "out/**", "!dist/**/*.map"]
+    },
+    "typecheck": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "tsconfig*.json"],
+      "outputs": []
+    },
+    "lint": {
+      "inputs": ["$TURBO_DEFAULT$", ".oxlintrc.json"],
+      "outputs": []
+    },
+    "fmt:check": {
+      "inputs": ["$TURBO_DEFAULT$", ".oxfmtignore"],
+      "outputs": []
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "vitest.config.*"],
+      "outputs": ["coverage/**"],
+      "env": ["CI"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "env": ["NODE_ENV"]
+    },
+    "clean": {
+      "cache": false
+    }
+  }
+}
