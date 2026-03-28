@@ -1,31 +1,47 @@
 ---
-title: Hello World
-description: Your favourite docs framework.
+title: Volt documentation
+description: >-
+  Volt is an end-to-end agentic development workspace. Editor, Git, terminal, and AI coding agents in one
+  native desktop app—workspace and canvas, side by side. Public beta; download for macOS, Windows, or
+  Linux, or install via CLI.
 icon: Rocket
 ---
 
-Hey there! Fumadocs is the docs framework that also works on Tanstack Start!
+## Welcome to Volt
 
-## Heading
+Volt is the **agentic development workspace**: your editor, Git, terminal, and **AI agents that ship**—in one surface. Built for flow, not tab sprawl.
 
-Hello World!
+## Install
 
-<Cards>
-  <Card title="Learn more about Tanstack Start" href="https://tanstack.com/start" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.dev" />
-</Cards>
+Install the latest release from the [homepage](/) or use the CLI:
 
-### CodeBlock
-
-```ts
-console.log('Hello World');
+```bash
+curl -fsSL https://get.voltleularia.com/install | sh
 ```
 
-#### Table
+## Stack
 
-| Head                            | Description                         |
-| ------------------------------- | ----------------------------------- |
-| `hello`                         | Hello World                         |
-| very **important**              | Hey                                 |
-| _Surprisingly_                  | Fumadocs                            |
-| very long text that looks weird | hello world hello world hello world |
+Volt is a native desktop app built with:
+
+- **Electron** — desktop shell with multi-webview architecture
+- **React** — UI
+- **Tailwind CSS** — styling
+- **electron-vite** — build tooling with hot reload
+- **xterm.js** — terminal emulation (backed by persistent sessions where applicable)
+- **Monaco** — code editing
+- Rich markdown editing where notes are used
+
+Local-first: your data stays on disk.
+
+## Quickstart
+
+1. Open Volt and add a workspace (local folder).
+2. Use the editor, terminal, and Git—optionally with AI agents—in one place.
+3. Stay in flow: less context switching, more shipping.
+
+## Learn more
+
+<Cards>
+  <Card title="GitHub" href="https://github.com/fuma-nama/fumadocs" />
+  <Card title="TanStack Start" href="https://tanstack.com/start" />
+</Cards>
