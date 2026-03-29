@@ -1,0 +1,360 @@
+@import './base.css';
+
+/* === GLOBAL RESET FOR CANVAS === */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  user-select: none;
+}
+
+#root {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #444;
+  border-radius: 11px;
+  overflow: hidden;
+}
+
+/* === DRAG REGION (titlebar replacement — must stay: -webkit-app-region not a Tailwind utility) === */
+.drag-region {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  border-top-left-radius: 11px;
+  border-top-right-radius: 11px;
+  -webkit-app-region: drag;
+  z-index: 1000;
+  pointer-events: all;
+  cursor: default;
+}
+
+/* === TILE ROOT — compound selectors that can't be expressed in Tailwind === */
+
+/* Unfocused tile: grab cursor on entire tile body */
+.tile-root:not([data-focused]) {
+  cursor: grab;
+}
+
+.tile-root:not([data-focused]):active {
+  cursor: grabbing;
+}
+
+/* Focused tile: interactive styling */
+.tile-root[data-focused] {
+  border: 1px solid #444;
+  background: #11111144;
+  backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+/* Selected tile via marquee — blue only when NOT focused (box-selected) */
+.tile-root[data-selected]:not([data-focused]) {
+  border: 1.5px solid #3b8df5;
+}
+
+/* Dim traffic lights when tile is unfocused */
+.tile-root:not([data-focused]) .traffic-light {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.tile-root:not([data-focused]):hover .traffic-light--close {
+  background: #ff5f57;
+}
+
+.tile-root:not([data-focused]):hover .traffic-light--minimize {
+  background: #febc2e;
+}
+
+.tile-root:not([data-focused]):hover .traffic-light--maximize {
+  background: #28c840;
+}
+
+/* × / − / + icons on hover — pseudo-element content can't be done in Tailwind */
+.traffic-light::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0);
+  transition: color 0.1s;
+}
+
+.traffic-lights:hover .traffic-light--close::after {
+  content: '✕';
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.traffic-lights:hover .traffic-light--minimize::after {
+  content: '−';
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.traffic-lights:hover .traffic-light--maximize::after {
+  content: '+';
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.traffic-light:active {
+  opacity: 0.7;
+}
+
+/* === TILE BODY — compound selectors === */
+
+.tile-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  padding: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+}
+
+/* Focused: body is interactive */
+.tile-root[data-focused] .tile-body {
+  user-select: text;
+  cursor: text;
+}
+
+/* Unfocused: body inherits grab cursor from tile-root */
+.tile-root:not([data-focused]) .tile-body {
+  user-select: none;
+  cursor: inherit;
+  pointer-events: none;
+}
+
+/* Unfocused: terminal content is non-interactive so events pass to canvas */
+.tile-root:not([data-focused]) .terminal-view,
+.tile-root:not([data-focused]) .terminal-view * {
+  pointer-events: none !important;
+}
+
+.tile-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.tile-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tile-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+
+.tile-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* === TERMINAL VIEW — compound selectors + scrollbar === */
+
+.terminal-view {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  overflow: hidden;
+  border-radius: 0 0 9px 9px;
+  pointer-events: inherit;
+  background: #191919;
+}
+
+/* Focused tile: terminal is fully interactive */
+.tile-root[data-focused] .terminal-view,
+.tile-root[data-focused] .terminal-view * {
+  pointer-events: auto !important;
+}
+
+/* Scrollbar styling for xterm viewport */
+.terminal-view .xterm-viewport::-webkit-scrollbar {
+  width: 7px;
+}
+
+.terminal-view .xterm-viewport::-webkit-scrollbar-thumb {
+  background: rgba(121, 121, 121, 0.4);
+  border-radius: 4px;
+}
+
+.terminal-view .xterm-viewport::-webkit-scrollbar-thumb:hover {
+  background: rgba(121, 121, 121, 0.7);
+}
+
+/* === COMMIT MESSAGE TEXTAREA — styled scrollbar (shows at 300px max) === */
+.commit-textarea::-webkit-scrollbar {
+  width: 4px;
+}
+
+.commit-textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.commit-textarea::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+}
+
+.commit-textarea::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.30);
+}
+
+
+/* === NATIVE SCROLLBAR — macOS-style, cross-platform === */
+/* Apply .volt-scroll to any scrollable container for consistent Mac-like scrollbars */
+
+.volt-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.13) transparent;
+}
+
+.volt-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background: transparent;
+}
+
+.volt-scroll::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.volt-scroll::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.volt-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.13);
+  border-radius: 10px;
+  border: 1.5px solid transparent;
+  background-clip: padding-box;
+  min-height: 32px;
+}
+
+.volt-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.22);
+  background-clip: padding-box;
+}
+
+.volt-scroll::-webkit-scrollbar-thumb:active {
+  background: rgba(255, 255, 255, 0.3);
+  background-clip: padding-box;
+}
+
+/* === RESIZE HANDLES (react-resizable — external library class names) === */
+.react-resizable-handle {
+  pointer-events: all;
+}
+
+.react-resizable-handle-sw { cursor: sw-resize; }
+.react-resizable-handle-se { cursor: se-resize; }
+.react-resizable-handle-nw { cursor: nw-resize; }
+.react-resizable-handle-ne { cursor: ne-resize; }
+.react-resizable-handle-w  { cursor: w-resize; }
+.react-resizable-handle-e  { cursor: e-resize; }
+.react-resizable-handle-n  { cursor: n-resize; }
+.react-resizable-handle-s  { cursor: s-resize; }
+
+/* === BROWSER TILE — compound selectors === */
+
+/* Unfocused: browser content is non-interactive so events pass to canvas */
+.tile-root:not([data-focused]) .browser-tile,
+.tile-root:not([data-focused]) .browser-tile * {
+  pointer-events: none !important;
+}
+
+/* Focused tile: browser is fully interactive */
+.tile-root[data-focused] .browser-tile,
+.tile-root[data-focused] .browser-tile * {
+  pointer-events: auto !important;
+}
+
+/* Spinner keyframe (referenced by inline style in TreeRow Spinner component) */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Keyframes referenced via Tailwind [animation:...] arbitrary values */
+@keyframes voice-shimmer {
+  0%   { background-position: -250% center; }
+  100% { background-position: 250% center; }
+}
+
+@keyframes minimap-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes popover-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes browser-loading {
+  0% { width: 0; left: 0; }
+  50% { width: 60%; left: 20%; }
+  100% { width: 0; left: 100%; }
+}
+
+@keyframes devtools-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes tooltip-in {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* === MONACO HOVER/PEEK WIDGET GLASSMORPHISM (external library class names) === */
+.monaco-editor .monaco-hover,
+.monaco-editor .monaco-hover-content,
+.monaco-editor .overflowingContentWidgets .monaco-hover {
+  background: #16161666 !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 6px !important;
+}
+
+.monaco-editor .peekview-widget,
+.monaco-editor .peekview-widget .head,
+.monaco-editor .peekview-widget .body,
+.monaco-editor .peekview-widget .tree {
+  background: #16161666 !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+
+.monaco-editor .peekview-widget .head {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}

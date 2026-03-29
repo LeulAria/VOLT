@@ -58,9 +58,7 @@ export const Route = createFileRoute("/")({
   component: Home,
   head: () => ({
     // TanStack Router supports `title` and `script:ld+json` in meta; types are narrower than runtime.
-    meta: [...homeRouteMeta()] as Array<
-      Record<string, unknown> & { title?: string }
-    >,
+    meta: [...homeRouteMeta()] as Array<Record<string, unknown> & { title?: string }>,
     links: [...homeRouteLinks()],
   }),
 });
@@ -130,10 +128,9 @@ function Home() {
 
             <div className="mt-3 w-full space-y-1.5 text-sm leading-snug text-white/55 sm:mt-4 sm:text-[15px] md:text-base">
               <p className="max-w-xl">
-                Workspace, editor, Git, and terminal, unified in one
-                lightning-fast surface.
-                <br className="hidden sm:block" /> AI agents handle the
-                mechanics so you stay in flow.
+                Workspace, editor, Git, and terminal, unified in one lightning-fast surface.
+                <br className="hidden sm:block" /> AI agents handle the mechanics so you stay in
+                flow.
               </p>
             </div>
 
@@ -143,13 +140,9 @@ function Home() {
                 {/* Below md: 2 lines (curl, then platforms). md+: one line with curl capped at 300px */}
                 <div className="flex w-full min-w-0 flex-col gap-3 md:flex-row md:items-center md:gap-3">
                   <div className="flex min-h-11 w-full min-w-0 items-center gap-2 rounded-[4px] border border-white/30 bg-black/40 py-[5px] pl-3 pr-2 text-[11px] text-white/75 md:max-w-[300px] md:shrink-0 md:text-xs">
-                    <span className="shrink-0 font-mono text-emerald-400/90">
-                      &gt;_
-                    </span>
+                    <span className="shrink-0 font-mono text-emerald-400/90">&gt;_</span>
                     <div className="min-w-0 flex-1 overflow-x-auto [scrollbar-width:thin]">
-                      <code className="block whitespace-nowrap pr-1 font-mono">
-                        {INSTALL_CURL}
-                      </code>
+                      <code className="block whitespace-nowrap pr-1 font-mono">{INSTALL_CURL}</code>
                     </div>
                     <button
                       type="button"
@@ -215,13 +208,8 @@ function Home() {
                   rel="noreferrer"
                   className="inline-flex h-10 w-full shrink-0 items-center justify-center gap-2 rounded-[4px] border border-white/35 bg-white/5 px-3 font-sans text-xs font-semibold text-white backdrop-blur-sm transition-colors hover:border-white/50 hover:bg-white/10 sm:h-11 md:w-auto md:min-w-[220px] md:px-4 md:text-sm"
                 >
-                  <Play
-                    className="size-3.5 shrink-0 sm:size-4"
-                    strokeWidth={2.25}
-                  />
-                  <span className="whitespace-nowrap">
-                    Watch 47-second demo
-                  </span>
+                  <Play className="size-3.5 shrink-0 sm:size-4" strokeWidth={2.25} />
+                  <span className="whitespace-nowrap">Watch 47-second demo</span>
                 </a>
               </div>
             </div>

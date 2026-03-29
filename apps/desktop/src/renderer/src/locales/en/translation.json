@@ -1,0 +1,136 @@
+{
+  "sidebar": {
+    "workspaces": "Workspaces",
+    "noFolderOpen": "No folder open",
+    "openFolder": "Open folder",
+    "addWorkspaceFolder": "Add workspace folder",
+    "focusMode": "Focus mode",
+    "launchTerminal": "Launch Terminal"
+  },
+  "topBar": {
+    "sourceControl": "Source Control",
+    "todos": "Todos",
+    "settings": "Settings",
+    "toggleRightSidebar": "Toggle right sidebar"
+  },
+  "canvas": {
+    "contextMenu": {
+      "newTerminal": "New Terminal",
+      "newBrowser": "New Browser"
+    }
+  },
+  "git": {
+    "noWorkspace": "No workspace selected.",
+    "loading": "Loading\u2026",
+    "noGitRepo": "No git repository found",
+    "initRepository": "Initialize Repository",
+    "treeView": "Tree view",
+    "listView": "List view",
+    "refresh": "Refresh",
+    "generateCommit": "Generate",
+    "generateCommitTitle": "Generate commit message with AI",
+    "commit": "Commit",
+    "commitAmend": "Commit (Amend)",
+    "commitPush": "Commit & Push",
+    "commitSync": "Commit & Sync",
+    "moreCommitOptions": "More commit options",
+    "sourceControl": "Source control",
+    "syncWithOrigin": "Sync with origin (pull)",
+    "behind": "Behind",
+    "ahead": "Ahead"
+  },
+  "deleteDialog": {
+    "title": "Delete",
+    "warningFolder": "This includes a folder and all its contents. This action cannot be undone.",
+    "bodyFolder": "The selected folder(s) and all files inside will be permanently deleted.",
+    "bodyFiles": "The selected file(s) will be permanently deleted.",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "deleteOneItem": "Delete \"{{name}}\"?",
+    "deleteMultipleItems": "Delete {{count}} items?"
+  },
+  "sidePanel": {
+    "close": "Close",
+    "mobile": "Mobile",
+    "devtools": "DevTools",
+    "console": "Console",
+    "network": "Network",
+    "noConsoleOutput": "No console output yet."
+  },
+  "network": {
+    "responseHeaders": "Response Headers",
+    "requestHeaders": "Request Headers",
+    "noRequests": "No requests captured yet",
+    "status": "Status",
+    "method": "Method",
+    "name": "Name",
+    "type": "Type",
+    "general": "General",
+    "requestUrl": "Request URL:",
+    "requestMethod": "Request Method:",
+    "statusCode": "Status Code:",
+    "headers": "headers",
+    "preview": "preview",
+    "response": "response",
+    "copyCurl": "Copy cURL",
+    "copied": "Copied!",
+    "noBody": "No body",
+    "noResponseBody": "No response body",
+    "loading": "Loading\u2026",
+    "none": "None",
+    "networkPanel": "Network",
+    "clear": "Clear",
+    "waitingForRequests": "Waiting for requests\u2026",
+    "copyAsCurl": "Copy as cURL"
+  },
+  "browser": {
+    "back": "Back",
+    "forward": "Forward",
+    "stop": "Stop",
+    "reload": "Reload",
+    "networkCdp": "Network (CDP)",
+    "developerTools": "Developer Tools (F12)",
+    "openInBrowser": "Open in browser",
+    "dockToRight": "Dock to right",
+    "dockToBottom": "Dock to bottom",
+    "enterUrl": "Enter URL...",
+    "inspectElement": "Inspect Element",
+    "closeDevTools": "Close DevTools",
+    "openDevTools": "Open DevTools"
+  },
+  "statusBar": {
+    "voice": "Voice",
+    "resume": "Resume",
+    "pause": "Pause",
+    "stopAndTranscribe": "Stop & transcribe to clipboard",
+    "transcribing": "Transcribing\u2026",
+    "fullscreen": "Fullscreen",
+    "exitFullscreen": "Exit fullscreen",
+    "showMinimap": "Show minimap",
+    "hideMinimap": "Hide minimap",
+    "openTerminal": "New terminal (\u2318N)",
+    "openBrowser": "Open browser (\u2318B)"
+  },
+  "monacoFile": {
+    "loading": "Loading\u2026",
+    "saving": "Saving\u2026",
+    "unsaved": "Unsaved \u00b7 \u2318S to save"
+  },
+  "common": {
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "rename": "Rename",
+    "newFile": "New File",
+    "newFolder": "New Folder",
+    "save": "Save",
+    "close": "Close",
+    "open": "Open",
+    "copy": "Copy",
+    "paste": "Paste",
+    "cut": "Cut",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "confirm": "Confirm"
+  }
+}
