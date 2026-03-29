@@ -21,6 +21,9 @@ jobs:
     name: macOS (x64)
     # macos-13 runners were retired; electron-builder can produce x64 from arm64 hosts.
     runs-on: macos-15
+    permissions:
+      contents: read
+      actions: write # upload-artifact
     steps:
       - uses: actions/checkout@v4
 
@@ -34,11 +37,11 @@ jobs:
       - name: Build
         run: bun run build:desktop
 
+      # --publish never: avoid GitHub Releases API here (403 with default token); release job uploads artifacts.
       - name: Package macOS x64
         working-directory: apps/desktop
-        run: bunx electron-builder --mac --x64
+        run: bunx electron-builder --mac --x64 --publish never
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
 
       - name: Upload artifacts
@@ -54,6 +57,9 @@ jobs:
   build-mac-arm64:
     name: macOS (arm64)
     runs-on: macos-latest
+    permissions:
+      contents: read
+      actions: write
     steps:
       - uses: actions/checkout@v4
 
@@ -69,9 +75,8 @@ jobs:
 
       - name: Package macOS arm64
         working-directory: apps/desktop
-        run: bunx electron-builder --mac --arm64
+        run: bunx electron-builder --mac --arm64 --publish never
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
 
       - name: Upload artifacts
@@ -87,6 +92,9 @@ jobs:
   build-linux:
     name: Linux
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: write
     steps:
       - uses: actions/checkout@v4
 
@@ -109,9 +117,7 @@ jobs:
 
       - name: Package Linux
         working-directory: apps/desktop
-        run: bunx electron-builder --linux
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bunx electron-builder --linux --publish never
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
@@ -126,6 +132,9 @@ jobs:
   build-windows:
     name: Windows
     runs-on: windows-latest
+    permissions:
+      contents: read
+      actions: write
     steps:
       - uses: actions/checkout@v4
 
@@ -141,9 +150,7 @@ jobs:
 
       - name: Package Windows
         working-directory: apps/desktop
-        run: bunx electron-builder --win
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bunx electron-builder --win --publish never
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
@@ -160,6 +167,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      actions: read # download-artifact
     steps:
       - uses: actions/download-artifact@v4
         with:

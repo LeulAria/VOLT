@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowUpRight, Check, Play } from "lucide-react";
-import { useState } from "react";
+import { Check, Play } from "lucide-react";
+import { useEffect, useState } from "react";
 import { DynamicText } from "@/components/dynamicText";
 import { homeRouteLinks, homeRouteMeta } from "@/lib/seo";
 import { gitConfig } from "@/lib/shared";
@@ -33,6 +33,25 @@ function WindowsIcon({ className }: { className?: string }) {
   );
 }
 
+/** GitHub mark (Streamline Unicons) — uses `currentColor` for light-on-dark header */
+function GithubMarkIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+    >
+      <path
+        fill="currentColor"
+        strokeWidth={0.6667}
+        d="M7.999933333333333 0.35346666666666665c-1.8616000000000001 0.00006666666666666667 -3.662466666666666 0.6626 -5.080266666666667 1.8689333333333331C1.5017999999999998 3.4287333333333327 0.5594666666666666 5.100266666666666 0.26126666666666665 6.937866666666666c-0.29819999999999997 1.8375333333333332 0.0672 3.7212666666666667 1.0308 5.3141333333333325 0.9635333333333334 1.5927333333333333 2.462466666666667 2.790733333333333 4.228533333333333 3.3795333333333333 0.39199999999999996 0.0686 0.5389999999999999 -0.1666 0.5389999999999999 -0.37239999999999995 0 -0.18619999999999998 -0.0098 -0.8036 -0.0098 -1.4602 -1.9697999999999998 0.36260000000000003 -2.4794 -0.4801333333333333 -2.6361999999999997 -0.9211333333333332 -0.174 -0.4288666666666666 -0.4498 -0.8089333333333333 -0.8036 -1.1074 -0.2744 -0.147 -0.6664 -0.5095999999999999 -0.0098 -0.5194 0.2507333333333333 0.027200000000000002 0.4911333333333333 0.11446666666666666 0.7010000000000001 0.2543333333333333 0.2098 0.13986666666666664 0.3828666666666667 0.3283333333333333 0.5044 0.5492666666666666 0.10719999999999999 0.1926 0.25139999999999996 0.36219999999999997 0.4242666666666666 0.499 0.17286666666666664 0.13679999999999998 0.37106666666666666 0.2382 0.5831999999999999 0.29819999999999997 0.2121333333333333 0.060066666666666664 0.434 0.07773333333333332 0.6529333333333334 0.05193333333333333s0.43066666666666664 -0.09453333333333333 0.6229333333333333 -0.2023333333333333c0.03393333333333333 -0.39859999999999995 0.2116 -0.7712666666666667 0.4998666666666667 -1.0486 -1.7444 -0.19599999999999998 -3.5671999999999997 -0.8722 -3.5671999999999997 -3.8709999999999996 -0.011 -0.7791333333333333 0.27646666666666664 -1.533 0.8036 -2.106933333333333 -0.23966666666666664 -0.6772 -0.21166666666666667 -1.4203999999999999 0.0784 -2.0776 0 0 0.6565333333333333 -0.20579999999999998 2.1559999999999997 0.8036 1.2828 -0.3528 2.6370666666666667 -0.3528 3.9199333333333333 0 1.4993999999999998 -1.0191999999999999 2.1559999999999997 -0.8036 2.1559999999999997 -0.8036 0.29006666666666664 0.6572 0.3181333333333333 1.4003999999999999 0.0784 2.0776 0.5286 0.5729333333333333 0.8164666666666666 1.3275333333333332 0.8036 2.106933333333333 0 3.0086 -1.8325999999999998 3.675 -3.577 3.8709999999999996 0.18706666666666666 0.1896 0.3311333333333333 0.41733333333333333 0.42246666666666666 0.6675333333333333 0.09133333333333334 0.2503333333333333 0.1277333333333333 0.5173333333333333 0.10673333333333332 0.7828666666666666 0 1.0486666666666666 -0.0098 1.8913333333333333 -0.0098 2.1559333333333335 0 0.20579999999999998 0.147 0.4508 0.5389999999999999 0.37239999999999995 1.7629333333333332 -0.5935333333333332 3.2575333333333334 -1.7943333333333333 4.217 -3.3879333333333332 0.9595333333333333 -1.5936666666666666 1.3214 -3.476466666666666 1.0211333333333332 -5.312266666666666 -0.3002666666666667 -1.8357333333333332 -1.2431333333333332 -3.5050666666666666 -2.6604 -4.709933333333333C11.659466666666667 1.0164666666666666 9.860133333333334 0.3544666666666666 7.999933333333333 0.35346666666666665Z"
+      />
+    </svg>
+  );
+}
+
 /** Apple logo */
 function AppleIcon({ className }: { className?: string }) {
   return (
@@ -51,8 +70,9 @@ function AppleIcon({ className }: { className?: string }) {
   );
 }
 
+/** Fixed square so Windows & Linux controls always match. */
 const platformOutlineBtn =
-  "inline-flex shrink-0 items-center justify-center rounded-[4px] border border-white/40 bg-transparent text-white transition-colors hover:border-white/55 hover:bg-white/5";
+  "inline-flex size-11 shrink-0 items-center justify-center rounded-[4px] border border-white/40 bg-transparent text-white transition-colors hover:border-white/55 hover:bg-white/5";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -65,6 +85,21 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const [copied, setCopied] = useState(false);
+  const [releaseTag, setReleaseTag] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    const url = `https://api.github.com/repos/${gitConfig.user}/${gitConfig.repo}/releases/latest`;
+    fetch(url, { headers: { Accept: "application/vnd.github+json" } })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data: { tag_name?: string } | null) => {
+        if (!cancelled && data?.tag_name) setReleaseTag(data.tag_name);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   async function copyInstall() {
     try {
@@ -96,17 +131,24 @@ function Home() {
       {/* md–xl: baked-in ~90% scale so layout matches reference whether browser is at 100% or 90% zoom */}
       <div className="relative z-10 flex min-h-screen flex-col md:min-h-[111.11vh] md:[zoom:0.9]">
         <header className="mx-auto flex w-full max-w-[1200px] shrink-0 flex-wrap items-center justify-end gap-2 px-4 pt-5 sm:gap-3 sm:px-6 sm:pt-6 md:px-10 lg:px-12">
-          <div className="rounded-[4px] border border-white/20 px-2 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-white/90">
-            Public beta
+          <div className="flex flex-col gap-0.5 rounded-[4px] border border-white/20 px-2 py-1.5 text-[10px] font-medium uppercase tracking-[0.2em] text-white/95">
+            <span>Public beta</span>
+            {releaseTag ? (
+              <span className="font-mono text-[9px] font-semibold normal-case tracking-normal text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.85)]">
+                {releaseTag}
+              </span>
+            ) : null}
           </div>
           <a
             href={`https://github.com/${gitConfig.user}/${gitConfig.repo}`}
             target="_blank"
             rel="noreferrer"
-            className="group flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-white/35 transition-colors hover:text-white/60"
+            title="Volt on GitHub"
+            aria-label="Volt on GitHub"
+            className="group inline-flex items-center gap-2 rounded-[4px] px-1.5 py-1 text-[10px] font-medium uppercase tracking-wider text-white/90 transition-colors [text-shadow:0_1px_2px_rgba(0,0,0,0.9),0_2px_8px_rgba(0,0,0,0.55)] hover:bg-white/5 hover:text-white"
           >
-            Get the GitHub
-            <ArrowUpRight className="size-3 transition-transform group-hover:-translate-y-px group-hover:translate-x-px" />
+            <GithubMarkIcon className="size-4 shrink-0 filter-[drop-shadow(0_1px_1px_rgba(0,0,0,0.85))] transition-transform group-hover:scale-105" />
+            <span>GitHub</span>
           </a>
         </header>
 
@@ -160,19 +202,19 @@ function Home() {
                     </button>
                   </div>
 
-                  {/* Full width below md; single nowrap row — scroll if needed on tiny viewports */}
-                  <div className="w-full min-w-0 overflow-x-auto overflow-y-visible pb-0.5 [scrollbar-width:thin] md:w-auto md:min-w-0 md:overflow-visible md:pb-0">
-                    <div className="flex w-full min-w-0 flex-nowrap items-center justify-between gap-1.5 sm:gap-2 md:w-max md:justify-start">
+                  {/* Mac + Win + Linux — single row; Mac grows, platform icons fixed size */}
+                  <div className="w-full min-w-0 overflow-x-auto [scrollbar-width:thin] md:w-auto md:min-w-0 md:overflow-visible">
+                    <div className="flex w-full min-w-0 flex-nowrap items-center gap-2 sm:gap-2.5 md:w-max md:max-w-full">
                       <a
                         href={DOWNLOAD_MAC}
                         target="_blank"
                         rel="noreferrer"
                         title="Download for Mac"
                         aria-label="Download for Mac"
-                        className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-[4px] bg-white px-2.5 font-sans text-xs font-semibold text-black transition-opacity hover:opacity-90 sm:h-11 sm:gap-2 sm:px-3.5 sm:text-sm"
+                        className="inline-flex h-11 min-h-11 min-w-0 flex-1 items-center justify-center gap-2 rounded-[4px] bg-white px-2.5 font-sans text-sm font-semibold text-black transition-opacity hover:opacity-90 sm:px-3.5"
                       >
-                        <span className="whitespace-nowrap">Download for</span>
-                        <AppleIcon className="size-4 shrink-0 text-black sm:size-5" />
+                        <span className="min-w-0 truncate sm:whitespace-nowrap">Download for Mac</span>
+                        <AppleIcon className="size-5 shrink-0 text-black" />
                       </a>
                       <a
                         href={DOWNLOAD_WIN}
@@ -180,9 +222,9 @@ function Home() {
                         rel="noreferrer"
                         title="Download for Windows"
                         aria-label="Download for Windows"
-                        className={`${platformOutlineBtn} size-10 sm:size-11`}
+                        className={platformOutlineBtn}
                       >
-                        <WindowsIcon className="size-5 text-white sm:size-[22px]" />
+                        <WindowsIcon className="size-[22px] text-white" />
                       </a>
                       <a
                         href={DOWNLOAD_LINUX}
@@ -190,12 +232,12 @@ function Home() {
                         rel="noreferrer"
                         title="Download for Linux"
                         aria-label="Download for Linux"
-                        className={`${platformOutlineBtn} size-10 sm:size-11`}
+                        className={platformOutlineBtn}
                       >
                         <img
                           src="/linux-icon.svg"
                           alt=""
-                          className="size-[22px] opacity-90 grayscale brightness-0 invert sm:size-6"
+                          className="size-6 opacity-90 grayscale brightness-0 invert"
                         />
                       </a>
                     </div>
