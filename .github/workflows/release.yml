@@ -19,7 +19,8 @@ concurrency:
 jobs:
   build-mac-x64:
     name: macOS (x64)
-    runs-on: macos-13
+    # macos-13 runners were retired; electron-builder can produce x64 from arm64 hosts.
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
 
