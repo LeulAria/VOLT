@@ -1,7 +1,9 @@
 appId: com.leularia.volt
 productName: Volt
+artifactName: ${productName}-${version}-${arch}.${ext}
 directories:
   buildResources: build
+  output: dist
 files:
   - '!**/.vscode/*'
   - '!src/*'
@@ -21,13 +23,7 @@ nsis:
 mac:
   target:
     - target: dmg
-      arch:
-        - x64
-        - arm64
     - target: zip
-      arch:
-        - x64
-        - arm64
   hardenedRuntime: false
   entitlements: build/entitlements.mac.plist
   entitlementsInherit: build/entitlements.mac.plist
@@ -37,8 +33,6 @@ mac:
     - NSDocumentsFolderUsageDescription: Application requests access to the user's Documents folder.
     - NSDownloadsFolderUsageDescription: Application requests access to the user's Downloads folder.
   notarize: false
-dmg:
-  artifactName: ${productName}-${version}-${arch}.${ext}
 linux:
   target:
     - AppImage
