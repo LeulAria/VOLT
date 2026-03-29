@@ -39,12 +39,21 @@ jobs:
         if: startsWith(matrix.os, 'ubuntu')
         run: sudo snap install snapcraft --classic
 
-      - name: Build/Release Electron app
-        uses: samuelmeuli/action-electron-builder@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          package_root: apps/desktop
-          skip_build: true
-          release: true
+      - name: Build/Release Electron app (macOS)
+        if: startsWith(matrix.os, 'macos')
+        run: bun --cwd apps/desktop run package:mac --publish always
         env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           USE_HARD_LINKS: false
+
+      - name: Build/Release Electron app (Windows)
+        if: startsWith(matrix.os, 'windows')
+        run: bun --cwd apps/desktop run package:win --publish always
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build/Release Electron app (Linux)
+        if: startsWith(matrix.os, 'ubuntu')
+        run: bun --cwd apps/desktop run package:linux --publish always
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
