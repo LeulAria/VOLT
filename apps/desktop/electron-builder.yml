@@ -44,7 +44,9 @@ linux:
   maintainer: LeulAria
   category: Utility
 appImage:
-  artifactName: ${name}-${version}.${ext}
+  artifactName: ${productName}-${version}.${ext}
+deb:
+  artifactName: ${productName}-${version}.${ext}
 npmRebuild: false
 publish:
   provider: github
