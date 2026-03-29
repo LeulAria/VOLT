@@ -1,5 +1,5 @@
-appId: com.electron.app
-productName: volt
+appId: com.leularia.volt
+productName: Volt
 directories:
   buildResources: build
 files:
@@ -19,6 +19,15 @@ nsis:
   uninstallDisplayName: ${productName}
   createDesktopShortcut: always
 mac:
+  target:
+    - target: dmg
+      arch:
+        - x64
+        - arm64
+    - target: zip
+      arch:
+        - x64
+        - arm64
   entitlementsInherit: build/entitlements.mac.plist
   extendInfo:
     - NSCameraUsageDescription: Application requests access to the device's camera.
@@ -31,9 +40,8 @@ dmg:
 linux:
   target:
     - AppImage
-    - snap
     - deb
-  maintainer: electronjs.org
+  maintainer: LeulAria
   category: Utility
 appImage:
   artifactName: ${name}-${version}.${ext}
