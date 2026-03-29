@@ -8,7 +8,7 @@
   "main": "./out/main/index.js",
   "scripts": {
     "dev": "electron-vite dev",
-    "build": "npm run typecheck && electron-vite build",
+    "build": "electron-vite build",
     "typecheck": "tsc --build",
     "start": "electron-vite preview",
     "postinstall": "electron-builder install-app-deps",

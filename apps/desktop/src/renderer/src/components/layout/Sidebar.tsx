@@ -15,7 +15,7 @@ import {
 } from "../tree/index";
 import { Tooltip } from "../ui/Tooltip";
 import { useTabStore } from "../../workbench/contrib/canvas/store/useTabStore";
-import { VOLTCODE_ENABLED } from "../../workbench/contrib/voltcode/feature-flag";
+// import { VOLTCODE_ENABLED } from "../../workbench/contrib/voltcode/feature-flag";
 import { DeleteDialog } from "./DeleteDialog";
 import { TerminalPopover } from "./TerminalPopover";
 
@@ -644,14 +644,13 @@ export default function Sidebar() {
       </div>
 
       {/* VOLT CODE section */}
-      {VOLTCODE_ENABLED && (
+      {/* {VOLTCODE_ENABLED && (
         <div className="flex-shrink-0 border-b border-white/[0.06]">
           <div className="flex items-center justify-between px-3 py-1.5">
             <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.06em", color: "rgba(255,255,255,0.45)", textTransform: "uppercase", userSelect: "none" }}>
               VOLT CODE
             </span>
             <div className="flex items-center gap-0.5">
-              {/* Open as tab */}
               <Tooltip content="Open Volt Code" position="right">
                 <button
                   onClick={() => useTabStore.getState().openVoltCodeTab()}
@@ -662,7 +661,7 @@ export default function Sidebar() {
                   </svg>
                 </button>
               </Tooltip>
-              {/* Open as canvas tile */}
+
               <Tooltip content="Open as canvas tile" position="right">
                 <button
                   onClick={() => addVoltCodeTileAtCenter()}
@@ -704,7 +703,7 @@ export default function Sidebar() {
             </div>
           )}
         </div>
-      )}
+      )} */}
 
       {/* WORKSPACES label */}
       <div

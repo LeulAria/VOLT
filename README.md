@@ -1,34 +1,54 @@
-# volt
+# Volt
 
-An Electron application with React and TypeScript
+<p align="center">
+  <img src="https://github.com/LeulAria/VOLT/raw/main/apps/docs/public/hero-ide.png" alt="Hero IDE" width="100%" />
+</p>
 
-## Recommended IDE Setup
+Volt is the **agentic development environment**: your editor, canvas, Git, terminal, and **AI agents that ship**—in one surface. Built for flow, not tab sprawl.
 
-- [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+## Install
 
-## Project Setup
+**[Download the latest release](https://github.com/LeulAria/VOLT/releases/latest)** (macOS, Apple Silicon)
 
-### Install
+Or install from the command line:
 
-```bash
-$ npm install
+```sh
+curl -fsSL https://raw.githubusercontent.com/LeulAria/VOLT/main/install.sh | bash
 ```
 
-### Development
+## Stack
+
+Volt is a native desktop app built with:
+
+- **Electron** — desktop shell with multi-webview architecture
+- **React** — UI
+- **Tailwind CSS** — styling
+- **electron-vite** — build tooling with hot reload
+- **xterm.js** — terminal emulation (backed by persistent sessions where applicable)
+- **Monaco** — code editing
+- Rich markdown editing where notes are used
+
+Local-first: your data stays on disk.
+
+## Development
 
 ```bash
-$ npm run dev
+# Install dependencies
+bun install
+
+# Start development
+bun run dev
 ```
 
-### Build
+## Build
 
 ```bash
-# For windows
-$ npm run build:win
-
 # For macOS
-$ npm run build:mac
+bun run package:mac
+
+# For Windows
+bun run package:win
 
 # For Linux
-$ npm run build:linux
+bun run package:linux
 ```

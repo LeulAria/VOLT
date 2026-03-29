@@ -47,7 +47,7 @@ export function RightSidebarContent({ view, workspacePath, onClose }: RightSideb
 
       // From OS file drop
       if (!filePath && e.dataTransfer.files.length > 0) {
-        filePath = e.dataTransfer.files[0]?.path ?? null;
+        filePath = (e.dataTransfer.files[0] as any)?.path ?? null;
       }
 
       if (!filePath || !workspacePath) return;

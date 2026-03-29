@@ -5,7 +5,7 @@ import { DynamicText } from "@/components/dynamicText";
 import { homeRouteLinks, homeRouteMeta } from "@/lib/seo";
 import { gitConfig } from "@/lib/shared";
 
-const INSTALL_CURL = "curl -fsSL https://get.voltleularia.com/install | sh";
+const INSTALL_CURL = "curl -fsSL https://raw.githubusercontent.com/LeulAria/VOLT/main/install.sh | bash";
 
 const RELEASES_BASE = `https://github.com/${gitConfig.user}/${gitConfig.repo}/releases/latest`;
 const DOWNLOAD_MAC = `${RELEASES_BASE}/download/Volt-mac.dmg`;
