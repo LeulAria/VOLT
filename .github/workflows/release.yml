@@ -37,13 +37,13 @@ jobs:
 
       - name: Build/Release Electron app (macOS)
         if: startsWith(matrix.os, 'macos')
-        run: bun --cwd apps/desktop run package:mac --publish always
+        run: cd apps/desktop && bunx electron-builder --mac --publish always
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           USE_HARD_LINKS: false
 
       - name: Build/Release Electron app (Linux)
         if: startsWith(matrix.os, 'ubuntu')
-        run: bun --cwd apps/desktop run package:linux --publish always
+        run: cd apps/desktop && bunx electron-builder --linux --publish always
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
