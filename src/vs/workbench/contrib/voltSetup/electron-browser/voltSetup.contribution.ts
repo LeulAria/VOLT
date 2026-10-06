@@ -4,8 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { registerMainProcessRemoteService } from '../../../../platform/ipc/electron-browser/services.js';
-import { IVoltFsBrowseService, VOLT_FS_BROWSE_CHANNEL_NAME } from '../../../../platform/voltFsBrowse/common/voltFsBrowse.js';
-// Storage cleanup and import from other editors (main process)
-import '../../voltSetup/electron-browser/voltSetup.contribution.js';
+import { IVoltEditorImportService, VOLT_EDITOR_IMPORT_CHANNEL_NAME } from '../../../../platform/voltEditorImport/common/voltEditorImport.js';
+import { IVoltStorageService, VOLT_STORAGE_CHANNEL_NAME } from '../../../../platform/voltStorage/common/voltStorage.js';
 
-registerMainProcessRemoteService(IVoltFsBrowseService, VOLT_FS_BROWSE_CHANNEL_NAME);
+registerMainProcessRemoteService(IVoltStorageService, VOLT_STORAGE_CHANNEL_NAME);
+registerMainProcessRemoteService(IVoltEditorImportService, VOLT_EDITOR_IMPORT_CHANNEL_NAME);
