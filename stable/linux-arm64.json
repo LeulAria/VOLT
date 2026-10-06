@@ -1,0 +1,12 @@
+{
+	"version": "0.0.1",
+	"productVersion": "0.0.1",
+	"commit": "7cc39172a64ebabdaa882a223016ff8cd6b46c7d",
+	"timestamp": 1791319603000,
+	"url": "https://github.com/LeulAria/VOLT/releases/download/v0.0.1/volt-stable-0.0.1-linux-arm64.tar.gz",
+	"sha256hash": "237977b54b1ded952cd8f47c0d7bc4eeb79f59cb132a850bebfff9f7e14b70f8",
+	"size": 148529701,
+	"downloadUrl": "https://github.com/LeulAria/VOLT/releases/download/v0.0.1/volt-stable-0.0.1-linux-arm64.deb",
+	"releaseUrl": "https://github.com/LeulAria/VOLT/releases/tag/v0.0.1",
+	"notes": "Volt 0.0.1 (`7cc39172`)\n\nDownload for your platform at https://volt.leularia.com/download.\n\n**Downloads:** https://volt.leularia.com/download\n\n\n**Full Changelog**: https://github.com/LeulAria/VOLT/commits/v0.0.1"
+}

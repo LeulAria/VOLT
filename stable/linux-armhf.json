@@ -1,0 +1,12 @@
+{
+	"version": "0.0.1",
+	"productVersion": "0.0.1",
+	"commit": "7cc39172a64ebabdaa882a223016ff8cd6b46c7d",
+	"timestamp": 1791319603000,
+	"url": "https://github.com/LeulAria/VOLT/releases/download/v0.0.1/volt-stable-0.0.1-linux-armhf.tar.gz",
+	"sha256hash": "7cd12647114189843932761bb42814769de30eb05f8103105125731c0e08b3af",
+	"size": 137444909,
+	"downloadUrl": "https://github.com/LeulAria/VOLT/releases/download/v0.0.1/volt-stable-0.0.1-linux-armhf.deb",
+	"releaseUrl": "https://github.com/LeulAria/VOLT/releases/tag/v0.0.1",
+	"notes": "Volt 0.0.1 (`7cc39172`)\n\nDownload for your platform at https://volt.leularia.com/download.\n\n**Downloads:** https://volt.leularia.com/download\n\n\n**Full Changelog**: https://github.com/LeulAria/VOLT/commits/v0.0.1"
+}
